@@ -16,9 +16,9 @@
 </div>
 <div class="scorestable">
 <p class="status">{{status}} <span class="time">{{time}} s</span></p>
-  <p class="scores">Очки: {{scores}}</p>
+  <p class="scores">Очки: {{scores}}  Рекорд: {{record}}</p>
   <p>Таблица Шульте. Генерируется случайным образом поле (5 на 5). Собирайте числовую последовательность от 1 до 25 строго по порядку. </p>
-  <button @click="start">Start</button><br>
+  <p><button @click="start">Start</button></p>
   <p>{{CurrentTime.hour+":"+CurrentTime.minute+":"+CurrentTime.second}}</p> 
 </div>
 </section>
@@ -27,6 +27,10 @@
  body{
   background-color:grey;
   font-family: "Georgia";
+  ::selected {
+      color:#00f;
+      background-color: #fbc;
+  }
     table{
         background-color:#fbc;
         border:4px outset #fbc;
@@ -38,6 +42,7 @@
         color:#00f;
         text-align:center;
         font-size:1.5em;
+        cursor: pointer;
       }
       td:hover{
         background-color:#d0d;
@@ -45,10 +50,12 @@
       .select {
         color: white;
         background-color:#d00;
+        border:1px solid #f00;
       } 
       .success {
         color: white;
         background-color:#0d0;
+        border:1px solid #0f0;
       } 
       }
   .game{
@@ -65,8 +72,17 @@
       letter-spacing:1px;
       text-align:center;
       width:400px;
+      button {
+       background-color: #0a0;
+       padding: 7px;
+       margin:15px;
+       color: #0fc;
+       border: 1px solid #070;
+       width: 100px;
+     }
     
     }
+    
     .status{
       color:#0f0;
     }
@@ -103,12 +119,16 @@ export default {
            count:0,
            scores:0,
            time:59,
+           startgame:false,
+           intervalid: 0,
            CurrentTime: current,
+           record:0, 
            status:"You game ..."  
        } //return
    }, //data
    methods: {
        select(k1,k2) {
+           if(this.startgame){
            this.board[k1][k2].click=true;
            let val=0;
            if(this.count<25)
@@ -120,19 +140,43 @@ export default {
               this.count++;
               this.scores+=5;
            }//else
+           }//start
        },//select
        timer() {
            this.time--;
            this.status = "You game ...";
-           if(this.time===0){  
+           if(this.time<=0){  
                this.status= "Game over";    
                this.count = 25;
+               this.startgame=false;
+               if(this.scores > this.record) 
+                    this.record=this.scores;
+               clearInterval(this.intervalid);
            }
-           if(this.count!=25) 
-               setTimeout(this.timer,1000)
        },//timer
        start() {
-           setInterval(()=>{this.timer();}, 1000);
+           let array=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+           for(let i=0; i<25; i++){
+             let b=array[i];
+             let ni=Math.floor(Math.random()*24);
+             array[i]=array[ni];
+             array[ni]=b;
+           }
+           let k1=0, k2=0;
+           for(let i=0; i<25; i++) {
+             this.board[k1][k2].val=array[i];
+             this.board[k1][k2].click=false;
+             k2++;
+             if(k2>4) {
+                k1++;
+                k2=0;
+                if(k1>4) {
+                   k1=0; 
+                } 
+             }
+           }
+           this.startgame=true;
+           this.intervalid=setInterval(()=>{this.timer();}, 1000);
        }   
    },//methods
    created() {
@@ -158,8 +202,6 @@ export default {
               } 
           }
        } 
-       this.count=0;
-       this.scores=0;
    }//created
 }    
 </script>
