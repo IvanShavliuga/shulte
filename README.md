@@ -21,3 +21,6 @@ npm run dev
 # Build for production with minification
 npm run build
 ```
+
+## License
+MIT
