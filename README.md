@@ -46,6 +46,8 @@ npm run build
 ``` bash
 cd ver_1
 index.html
+#to resource
+https://codepen.io/ivanshavliuga/pen/RqojWP
 ```
 
 ## License
