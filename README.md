@@ -11,7 +11,8 @@ https://isschavliuga.ucoz.net
 
 # versions
 ## Version 3.0.0
-```
+
+``` bash
 cd iv2shulte3
 
 # Project setup
@@ -38,6 +39,13 @@ npm run dev
 
 # Build for production with minification
 npm run build
+```
+
+## version 1.0.0
+
+``` bash
+cd ver_1
+index.html
 ```
 
 ## License
