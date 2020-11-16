@@ -9,20 +9,24 @@ Used vue.js and scss
 
 https://isschavliuga.ucoz.net
 
-## versions
-# Version 3.0.0
+# versions
+## Version 3.0.0
 ```
 cd iv2shulte3
+
 # Project setup
 npm install
+
 # Compiles and hot-reloads for development
 npm run serve
+
 # Compiles and minifies for production
 npm run build
+
 # Lints and fixes files
 npm run lint
 ```
-#version 2.0.0
+##version 2.0.0
 ## Getting up and Running
 
 ``` bash
