@@ -26,7 +26,7 @@ npm run build
 # Lints and fixes files
 npm run lint
 ```
-##version 2.0.0
+## version 2.0.0
 ## Getting up and Running
 
 ``` bash
