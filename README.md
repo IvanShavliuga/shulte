@@ -11,7 +11,8 @@ https://isschavliuga.ucoz.net
 
 # versions
 ## Version 3.0.0
-```
+
+``` bash
 cd iv2shulte3
 
 # Project setup
@@ -26,7 +27,7 @@ npm run build
 # Lints and fixes files
 npm run lint
 ```
-##version 2.0.0
+## version 2.0.0
 ## Getting up and Running
 
 ``` bash
@@ -38,6 +39,15 @@ npm run dev
 
 # Build for production with minification
 npm run build
+```
+
+## version 1.0.0
+
+``` bash
+cd ver_1
+index.html
+#to resource
+https://codepen.io/ivanshavliuga/pen/RqojWP
 ```
 
 ## License
