@@ -10,7 +10,12 @@ Used vue.js and scss
 https://isschavliuga.ucoz.net
 
 # versions
-## Version 3.0.0
+## <a href=https://codepen.io/ivanshavliuga/pen/pobKbpm>version 3.0.0</a>
+
+<iframe height="265" style="width: 100%;" scrolling="no" title="balls vue animate (crazy table shulte)" src="https://codepen.io/ivanshavliuga/embed/pobKbpm?height=265&theme-id=dark&default-tab=js,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/ivanshavliuga/pen/pobKbpm'>balls vue animate (crazy table shulte)</a> by Ivan Shavliuga
+  (<a href='https://codepen.io/ivanshavliuga'>@ivanshavliuga</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 ``` bash
 cd iv2shulte3
@@ -41,7 +46,7 @@ npm run dev
 npm run build
 ```
 
-## version 1.0.0
+## <a href=https://codepen.io/ivanshavliuga/pen/RqojWP>version 1.0.0</a>
 
 ``` bash
 cd ver_1
