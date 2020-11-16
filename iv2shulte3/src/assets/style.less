@@ -1,0 +1,96 @@
+body {
+  background-color:black;
+}
+#app {
+  background-color:black;
+}
+#app > div {
+  display: flex;
+}
+.ball::selection {
+  background:transparent;
+  cursor: pointer;
+}
+.ball {
+  border-radius: 45%;
+  width: 35px;
+  height: 35px;
+  color: yellow;
+  text-align: center;
+  line-height: 35px;
+  margin: 3px;
+  border: 1px solid black;
+  animation: 2s opacityeff infinite;
+  cursor: pointer;
+}
+.ball[data-check='OK'] {
+  border: 1px solid white;
+  color: white;
+}
+.check {
+  border-radius: 45%;
+  width: 35px;
+  height: 35px;
+  color: yellow;
+  text-align: center;
+  line-height: 35px;
+  margin: 3px;
+  border: 1px solid black;
+  opacity: 0.7;
+  background: red;
+}
+.check[data-status='true'] {
+  background: green;
+}
+/*.check[data-status='false'] {
+    background: red;
+}*/
+.select {
+  color: #fff;
+  word-spacing: 15px;
+}
+.select > div {
+  margin: 30px 10px;
+}
+.bar {
+  height:20px;
+  background:#555;
+}
+.pos {
+  color:white;
+  font-size: 18px;
+  background:#a5a;
+  width:10px;
+  text-align:right;
+}
+.timers {
+
+}
+.item {
+  color: #fff;
+  list-style: none;
+  display: inline-block;
+  margin: 0 10px;
+}
+@keyframes opacityeff {
+  0% {
+      opacity:0.1;
+      transform:rotateZ(45deg);
+  }
+  25% {
+      opacity:0.4;
+       transform:rotateZ(5deg);
+  }
+  50% {
+      opacity: 1;
+       transform:rotateZ(0deg);
+  }
+  75% {
+      opacity: 0.8;
+       transform:rotateZ(135deg);
+  }
+  100% {
+      opacity: 1;
+       transform:rotateZ(25deg);
+  }
+}
