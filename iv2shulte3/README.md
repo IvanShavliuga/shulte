@@ -1,3 +1,4 @@
+# iv2shulte3
 ## Таблиа Шульте
 Генерируется случайным образом поле (5 на 5).
 Собирайте числовую последовательность от 1 до 25 строго по порядку.
@@ -9,32 +10,29 @@ Used vue.js and scss
 
 https://isschavliuga.ucoz.net
 
-## versions
-# Version 3.0.0
+
+## Project setup
 ```
-cd iv2shulte3
-# Project setup
 npm install
-# Compiles and hot-reloads for development
+```
+
+### Compiles and hot-reloads for development
+```
 npm run serve
-# Compiles and minifies for production
+```
+
+### Compiles and minifies for production
+```
 npm run build
-# Lints and fixes files
+```
+
+### Lints and fixes files
+```
 npm run lint
 ```
-#version 2.0.0
-## Getting up and Running
 
-``` bash
-# Install the dependencies
-npm install
-
-# Serve with hot reload at http://localhost:8080
-npm run dev
-
-# Build for production with minification
-npm run build
-```
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## License
 MIT
