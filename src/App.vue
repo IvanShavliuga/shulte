@@ -1,8 +1,6 @@
 <template>
 <main>
    <app-game-board></app-game-board>
-
-
 </main>
 </template>
 
