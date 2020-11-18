@@ -12,21 +12,22 @@
         </div>
       </div>
     </div>
-    <div class="bar" :style="'width:'+board.length*2+'px'">
-      <div class="pos" :style="'width:'+count*2+'px'"></div>
+    <div class="bar" :style="'width:'+board.length*5.3+'px'">
+      <div class="current" :data-curr="curr" :style="'width:'+(count/64)*100+'%;background-color:rgb(23,'+(count*2.5+40)+',23);'"></div>
     </div>
     <div class="select">
       <div class="count">Count: {{count}}</div>
       <div class="scores">Scores: {{scores}}</div>
-      <div>{{clickok}}</div>
+      <div v-if="memory.length&&!winner">{{curr.h+':'+curr.m+':'+curr.s}}</div>
+      <div v-if="winner">{{memory[2].hour+':'+memory[2].minute+':'+memory[2].second}}</div>
       <div>{{current.hour+':'+current.minute+':'+current.second}}</div>
       <div class="winner" v-if="winner">You winner</div>
     </div>
-    <ul class="timers">
+    <!--<ul class="timers">
       <li class="item" v-for="(c,k) in memory" :key="k">
         {{c.hour+':'+c.minute+':'+c.second}}
       </li>
-    </ul>
+    </ul>-->
   </div>
 </template>
 
@@ -47,7 +48,13 @@ export default {
       game: false,
       clickok: false,
       current: current,
-      memory: []
+      memory: [],
+      curr: {
+        h: 0,
+        m: 0,
+        s: 0,
+        id: null
+      }
     }
   },
   methods: {
@@ -82,6 +89,7 @@ export default {
       this.checked.push(this.selnum)
       if (this.game === false) {
         this.game = true
+        this.curr.id = setTimeout(() => this.countertime(), 1000)
         this.memory.push({
           hour: this.current.hour,
           minute: this.current.minute,
@@ -89,6 +97,7 @@ export default {
           mark: 'start'
         })
       }
+      // this.curr = Math.floor((64 - this.count) / 64 + 1) + '0'
       if (this.count < 64) {
         if (this.selnum - this.count !== 1) {
           this.scores -= 5
@@ -110,7 +119,7 @@ export default {
           const dh = this.memory[1].hour - this.memory[0].hour
           const dm = this.memory[1].minute - this.memory[0].minute
           const ds = this.memory[1].second - this.memory[0].second
-
+          clearInterval(this.curr.id)
           this.memory.push({
             hour: (dh < 0) ? (this.memory[0].hour - this.memory[1].hour) : (dh),
             minute: (dm < 0) ? (this.memory[0].minute - this.memory[1].minute) : (dm),
@@ -119,6 +128,15 @@ export default {
           })
         }
       }
+    },
+    countertime () {
+      const dh = this.current.hour - this.memory[0].hour
+      const dm = this.current.minute - this.memory[0].minute
+      const ds = this.current.second - this.memory[0].second
+      this.curr.h = (dh < 0) ? (this.memory[0].hour - this.current.hour) : (dh)
+      this.curr.m = (dm < 0) ? (this.memory[0].minute - this.current.minute) : (dm)
+      this.curr.s = (ds < 0) ? (this.memory[0].second - this.current.second) : (ds)
+      setTimeout(() => this.countertime(), 1000)
     }
   },
   created () {
