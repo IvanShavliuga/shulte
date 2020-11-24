@@ -1,60 +1,41 @@
 <!-- Use preprocessors via the lang attribute! e.g. <template lang="pug"> -->
 <template>
-  <div id="app">
-    <div v-for="(y,ky) in rows" :key="ky" >
-      <div v-for="(x,kx) in columns"  :key="kx">
-        <div class="ball"
-          :id="x-1+(y-1)*8"
-          :data-check="printnum(x-1,y-1)"
-          @click="checkball(x-1,y-1)"
-          :style="draw(x+Math.floor(Math.random()%10),((x*y)+Math.floor(Math.random()%10))%10,y+Math.floor(Math.random()%10))">
-            {{printnum(x-1,y-1)}}
-        </div>
-      </div>
+  <div id="app" :style="'width: '+(260+level*40)+'px;'+'height: '+(280+level*40)+'px'">
+  <div v-for="(y,ky) in rows" :key="ky" >
+    <div v-for="(x,kx) in columns"  :key="kx">
+      <div class="ball"
+        :id="x-1+(y-1)*8"
+        :data-check="printnum(x-1,y-1)"
+        @click="checkball(x-1,y-1)"
+        :style="draw(x+Math.floor(Math.random()%10),((x*y)+Math.floor(Math.random()%10))%10,y+Math.floor(Math.random()%10))">{{printnum(x-1,y-1)}}</div>
     </div>
-    <div class="bar" :style="'width:'+board.length*5.3+'px'">
-      <div class="current" :data-curr="curr" :style="'width:'+(count/64)*100+'%;background-color:rgb(23,'+(count*2.5+40)+',23);'"></div>
-    </div>
-    <div class="select">
-      <div class="count">Count: {{count}}</div>
-      <div class="scores">Scores: {{scores}}</div>
-      <div v-if="memory.length&&!winner">{{curr.h+':'+curr.m+':'+curr.s}}</div>
-      <div v-if="winner">{{memory[2].hour+':'+memory[2].minute+':'+memory[2].second}}</div>
-      <div>{{current.hour+':'+current.minute+':'+current.second}}</div>
-      <div class="winner" v-if="winner">You winner</div>
-    </div>
-    <!--<ul class="timers">
-      <li class="item" v-for="(c,k) in memory" :key="k">
-        {{c.hour+':'+c.minute+':'+c.second}}
-      </li>
-    </ul>-->
+  </div>
+  <div class="bar" :style="'width:'+board.length*5.5+'px'">
+    <div class="pos" :style="'width:'+count*2+'px'"></div>
+  </div>
+  <div class="select">
+    <div class="count">Count: {{count}}</div>
+    <div class="scores">Scores: {{scores}}</div>
+    <div class="level">Level: {{level}}</div>
+    <div class="winner" v-if="winner"><span>You winner</span><br/><button @click="nextlevel">Next</button></div>
+  </div>
   </div>
 </template>
 
 <script>
-import { current } from './timer'
-
 export default {
   data () {
     return {
-      rows: [1, 2, 3, 4, 5, 6, 7, 8],
-      columns: [1, 2, 3, 4, 5, 6, 7, 8],
+      rows: [1, 2, 3, 4, 5],
+      columns: [1, 2, 3, 4, 5],
       board: [],
       checked: [],
       scores: 0,
       count: 0,
       selnum: 0,
       winner: false,
-      game: false,
       clickok: false,
-      current: current,
-      memory: [],
-      curr: {
-        h: 0,
-        m: 0,
-        s: 0,
-        id: null
-      }
+      level: 1
     }
   },
   methods: {
@@ -67,6 +48,7 @@ export default {
     },
     generatenumbers () {
       let i = 0
+      const bl = this.rows.length * this.columns.length
 
       for (let y = 0; y < this.rows.length; y++) {
         for (let x = 0; x < this.columns.length; x++) {
@@ -74,69 +56,45 @@ export default {
           this.board.push(i)
         }
       }
-      for (i = 0; i < 64; i++) {
+      for (i = 0; i < bl; i++) {
         const b = this.board[i]
-        const ni = Math.floor(Math.random() * 24)
+        const ni = Math.floor(Math.random() * bl)
         this.board[i] = this.board[ni]
         this.board[ni] = b
       }
     },
     printnum (x, y) {
-      return this.board[x + y * 8]
+      const cl = this.columns.length
+      return this.board[x + y * cl]
     },
     checkball (x, y) {
-      this.selnum = this.board[x + y * 8]
+      const cl = this.columns.length
+      const bl = this.rows.length * this.columns.length
+      this.selnum = this.board[x + y * cl]
       this.checked.push(this.selnum)
-      if (this.game === false) {
-        this.game = true
-        this.curr.id = setTimeout(() => this.countertime(), 1000)
-        this.memory.push({
-          hour: this.current.hour,
-          minute: this.current.minute,
-          second: this.current.second,
-          mark: 'start'
-        })
-      }
-      // this.curr = Math.floor((64 - this.count) / 64 + 1) + '0'
-      if (this.count < 64) {
+      if (this.count < bl) {
         if (this.selnum - this.count !== 1) {
           this.scores -= 5
           this.clickok = false
         } else {
           this.count++
           this.scores += 5
-          this.board[x + y * 8] = 'OK'
+          this.board[x + y * cl] = 'OK'
           this.clickok = true
         }
-        if (this.count === 64) {
+        if (this.count === bl) {
           this.winner = true
-          this.memory.push({
-            hour: this.current.hour,
-            minute: this.current.minute,
-            second: this.current.second,
-            mark: 'end'
-          })
-          const dh = this.memory[1].hour - this.memory[0].hour
-          const dm = this.memory[1].minute - this.memory[0].minute
-          const ds = this.memory[1].second - this.memory[0].second
-          clearInterval(this.curr.id)
-          this.memory.push({
-            hour: (dh < 0) ? (this.memory[0].hour - this.memory[1].hour) : (dh),
-            minute: (dm < 0) ? (this.memory[0].minute - this.memory[1].minute) : (dm),
-            second: (ds < 0) ? (this.memory[0].second - this.memory[1].second) : (ds),
-            mark: 'game'
-          })
         }
       }
     },
-    countertime () {
-      const dh = this.current.hour - this.memory[0].hour
-      const dm = this.current.minute - this.memory[0].minute
-      const ds = this.current.second - this.memory[0].second
-      this.curr.h = (dh < 0) ? (this.memory[0].hour - this.current.hour) : (dh)
-      this.curr.m = (dm < 0) ? (this.memory[0].minute - this.current.minute) : (dm)
-      this.curr.s = (ds < 0) ? (this.memory[0].second - this.current.second) : (ds)
-      setTimeout(() => this.countertime(), 1000)
+    nextlevel () {
+      this.rows.push(this.rows.length + 1)
+      this.columns.push(this.columns.length + 1)
+      this.board = []
+      this.generatenumbers()
+      this.level++
+      this.count = 0
+      this.winner = false
     }
   },
   created () {
@@ -147,5 +105,105 @@ export default {
 
 <!-- Use preprocessors via the lang attribute! e.g. <style lang="scss"> -->
 <style>
-@import './assets/style.less'
+body {
+
+  background-image:url(https://ivanshavliuga.github.io/crios/images/header.png);
+    background-size: cover;
+}
+#app {
+    background-color:black;
+    opacity: 0.9;
+    margin: 45px auto;
+  padding: 10px;
+  width: 350px;
+  height: 350px;
+  border: 1px dotted #df56d5;
+}
+#app > div {
+    display: flex;
+}
+.ball::selection {
+    background:transparent;
+    cursor: pointer;
+}
+.ball {
+    border-radius: 45%;
+    width: 35px;
+    height: 35px;
+    color: yellow;
+    text-align: center;
+    line-height: 35px;
+    margin: 3px;
+    border: 1px solid black;
+    animation: 2s opacityeff infinite;
+    cursor: pointer;
+}
+.ball[data-check='OK'] {
+    border: 1px solid white;
+    color: white;
+}
+.check {
+    border-radius: 45%;
+    width: 35px;
+    height: 35px;
+    color: yellow;
+    text-align: center;
+    line-height: 35px;
+    margin: 3px;
+    border: 1px solid black;
+    opacity: 0.7;
+    background: red;
+}
+.check[data-status='true'] {
+    background: green;
+}
+/*.check[data-status='false'] {
+    background: red;
+}*/
+.select {
+    color: #fff;
+    word-spacing: 15px;
+}
+.select > div {
+    margin: 30px 10px;
+}
+.bar {
+    height:20px;
+    background:#555;
+}
+.pos {
+    color:white;
+    font-size: 18px;
+    background:#a5a;
+    width:10px;
+    text-align:right;
+}
+  .winner > button {
+    border: 1px solid white;
+    background-color: transparent;
+    padding: 3px 7px;
+    color: yellow;
+  }
+@keyframes opacityeff {
+    0% {
+        opacity:0.1;
+        transform:rotateZ(45deg);
+    }
+    25% {
+        opacity:0.4;
+         transform:rotateZ(5deg);
+    }
+    50% {
+        opacity: 1;
+         transform:rotateZ(0deg);
+    }
+    75% {
+        opacity: 0.8;
+         transform:rotateZ(135deg);
+    }
+    100% {
+        opacity: 1;
+         transform:rotateZ(25deg);
+    }
+}
 </style>
