@@ -1,24 +1,56 @@
 <!-- Use preprocessors via the lang attribute! e.g. <template lang="pug"> -->
 <template>
-  <div id="app" :style="'width: '+(260+level*40)+'px;'+'height: '+(280+level*40)+'px'">
-  <div v-for="(y,ky) in rows" :key="ky" >
-    <div v-for="(x,kx) in columns"  :key="kx">
-      <div class="ball"
-        :id="x-1+(y-1)*8"
-        :data-check="printnum(x-1,y-1)"
-        @click="checkball(x-1,y-1)"
-        :style="draw(x+Math.floor(Math.random()%10),((x*y)+Math.floor(Math.random()%10))%10,y+Math.floor(Math.random()%10))">{{printnum(x-1,y-1)}}</div>
+  <div
+    id="app"
+    :style="'width: '+(260+level*40)+'px;'+'height: '+(280+level*40)+'px'"
+  >
+    <div
+      v-for="(y,ky) in rows"
+      :key="ky"
+    >
+      <div
+        v-for="(x,kx) in columns"
+        :key="kx"
+      >
+        <div
+          :id="x-1+(y-1)*8"
+          class="ball"
+          :data-check="printnum(x-1,y-1)"
+          :style="draw(x+Math.floor(Math.random()%10),((x*y)+Math.floor(Math.random()%10))%10,y+Math.floor(Math.random()%10))"
+          @click="checkball(x-1,y-1)"
+        >
+          {{ printnum(x-1,y-1) }}
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="bar" :style="'width:'+board.length*5.5+'px'">
-    <div class="pos" :style="'width:'+count*2+'px'"></div>
-  </div>
-  <div class="select">
-    <div class="count">Count: {{count}}</div>
-    <div class="scores">Scores: {{scores}}</div>
-    <div class="level">Level: {{level}}</div>
-    <div class="winner" v-if="winner"><span>You winner</span><br/><button @click="nextlevel">Next</button></div>
-  </div>
+    <div
+      class="bar"
+      :style="'width:'+board.length*5.5+'px'"
+    >
+      <div
+        class="pos"
+        :style="'width:'+count*2+'px'"
+      />
+    </div>
+    <div class="select">
+      <div class="count">
+        Count: {{ count }}
+      </div>
+      <div class="scores">
+        Scores: {{ scores }}
+      </div>
+      <div class="level">
+        Level: {{ level }}
+      </div>
+      <div
+        v-if="winner"
+        class="winner"
+      >
+        <span>You winner</span><br><button @click="nextlevel">
+          Next
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,6 +69,9 @@ export default {
       clickok: false,
       level: 1
     }
+  },
+  created () {
+    this.generatenumbers()
   },
   methods: {
     draw (x, y, r) {
@@ -96,9 +131,6 @@ export default {
       this.count = 0
       this.winner = false
     }
-  },
-  created () {
-    this.generatenumbers()
   }
 }
 </script>
