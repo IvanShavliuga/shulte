@@ -14,9 +14,9 @@ Used vue.js and scss
 Проект создан в учебных целях для изучения vue.js
 
 https://isschavliuga.ucoz.net
+https://ivanshavliuga.github.io
 
 ``` bash
-cd iv2shulte3
 
 # Project setup
 npm install
