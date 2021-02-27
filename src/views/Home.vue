@@ -1,15 +1,12 @@
 <template>
-  <div class="home">
-    <img
-      alt="Vue logo"
-      src="../assets/logo.png"
-    >
-  </div>
+  <board />
 </template>
 
 <script>
-// @ is an alias to /src
+import board from '../components/Board.vue'
 export default {
-  name: 'Home'
+  components: {
+    board
+  }
 }
 </script>
