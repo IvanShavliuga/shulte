@@ -1,12 +1,17 @@
 <!-- Use preprocessors via the lang attribute! e.g. <template lang="pug"> -->
 <template>
-  <div id="app">
-    <router-view />
+  <div class="board">
+    <board />
   </div>
 </template>
 
 <script>
-
+import board from '@/components/Board.vue'
+export default {
+  components: {
+    board
+  }
+}
 </script>
 
 <!-- Use preprocessors via the lang attribute! e.g. <style lang="scss"> -->
@@ -15,7 +20,7 @@ body {
   background-image:url(https://ivanshavliuga.github.io/simples/photos/my/coins.jpg);
   background-size: cover;
 }
-#app {
+.board {
   background-color:black;
   opacity: 0.9;
   margin: 45px auto;

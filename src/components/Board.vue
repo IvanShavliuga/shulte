@@ -21,38 +21,28 @@
         </div>
       </div>
     </div>
-    <div
-      class="bar"
-      :style="'width:'+board.length*5.5+'px'"
-    >
-      <div
-        class="pos"
-        :style="'width:'+count*2+'px'"
-      />
-    </div>
-    <div class="select">
-      <div class="count">
-        Count: {{ count }}
-      </div>
-      <div class="scores">
-        Scores: {{ scores }}
-      </div>
-      <div class="level">
-        Level: {{ level }}
-      </div>
-      <div
-        v-if="winner"
-        class="winner"
-      >
-        <span>You winner</span><br><button @click="nextlevel">
-          Next
-        </button>
-      </div>
-    </div>
+    <barprogress
+      :barlength="board.length"
+      :barpos="count"
+    />
+    <infopanel
+      :scores="scores"
+      :count="count"
+      :winner="winner"
+      :level="level"
+      @next="nextlevel"
+    />
   </section>
 </template>
 <script>
+import infopanel from './Infopanel.vue'
+import barprogress from './Barprogress.vue'
+
 export default {
+  components: {
+    infopanel,
+    barprogress
+  },
   data () {
     return {
       rows: [1, 2, 3, 4, 5],
@@ -173,30 +163,7 @@ section > div {
 /*.check[data-status='false'] {
     background: red;
 }*/
-.select {
-    color: #fff;
-    word-spacing: 15px;
-}
-.select > div {
-    margin: 30px 10px;
-}
-.bar {
-    height:20px;
-    background:#555;
-}
-.pos {
-    color:white;
-    font-size: 18px;
-    background:#a5a;
-    width:10px;
-    text-align:right;
-}
-  .winner > button {
-    border: 1px solid white;
-    background-color: transparent;
-    padding: 3px 7px;
-    color: yellow;
-  }
+
 @keyframes opacityeff {
     0% {
         opacity:0.1;
