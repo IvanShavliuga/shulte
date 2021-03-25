@@ -21,10 +21,6 @@
         </div>
       </div>
     </div>
-    <barprogress
-      :barlength="board.length"
-      :barpos="count"
-    />
     <infopanel
       :scores="scores"
       :count="count"
@@ -32,21 +28,23 @@
       :level="level"
       @next="nextlevel"
     />
+    <!-- <div class="time">
+      {{ timedta+'' }}
+    </div> -->
   </section>
 </template>
 <script>
 import infopanel from './Infopanel.vue'
-import barprogress from './Barprogress.vue'
+// import current from './../timer.js'
 
 export default {
   components: {
-    infopanel,
-    barprogress
+    infopanel
   },
   data () {
     return {
-      rows: [1, 2, 3, 4, 5],
-      columns: [1, 2, 3, 4, 5],
+      rows: [],
+      columns: [],
       board: [],
       checked: [],
       scores: 0,
@@ -55,10 +53,23 @@ export default {
       winner: false,
       clickok: false,
       level: 1
+      // timedta: '0.0.0'
     }
   },
   created () {
+    console.log(localStorage.shultebrlength)
+    if (localStorage.shultebrlength) {
+      for (let i = 0; i < localStorage.shultebrlength; i++) {
+        this.rows.push(i + 1)
+        this.columns.push(i + 1)
+      }
+    }
+    console.log(this.rows)
+    this.scores = (localStorage.shultescores) ? (+localStorage.shultescores) : (0)
+    this.level = (localStorage.shultelevel) ? (+localStorage.shultelevel) : (1)
     this.generatenumbers()
+    // current.now()
+    // this.timedta = current.hour + ':' + current.minute + ':' + current.second
   },
   methods: {
     draw (x, y, r) {
@@ -106,6 +117,7 @@ export default {
         }
         if (this.count === bl) {
           this.winner = true
+          // localStorage.level = this.level
         }
       }
     },
@@ -117,11 +129,20 @@ export default {
       this.level++
       this.count = 0
       this.winner = false
+      localStorage.shultebrlength = this.columns.length
+      localStorage.shultescores = this.scores
+      localStorage.shultelevel = this.level
+    },
+    setnull () {
+      localStorage.shultescores = 0
+      localStorage.shultelevel = 1
+      localStorage.shultebrlength = 5
     }
   }
 }
 </script>
 <style scoped>
+
 section > div {
     display: flex;
 }
@@ -163,7 +184,10 @@ section > div {
 /*.check[data-status='false'] {
     background: red;
 }*/
-
+.time {
+  color: white;
+  border: 1px solid red;
+}
 @keyframes opacityeff {
     0% {
         opacity:0.1;

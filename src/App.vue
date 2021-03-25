@@ -17,16 +17,15 @@ export default {
 <!-- Use preprocessors via the lang attribute! e.g. <style lang="scss"> -->
 <style>
 body {
-  background-image:url(https://ivanshavliuga.github.io/simples/photos/my/coins.jpg);
+  background: url(https://ivanshavliuga.github.io/simples/photos/my/ufo-r.jpg) rgba(120, 120, 120, 0.7);
   background-size: cover;
 }
 .board {
   background-color:black;
-  opacity: 0.9;
+  opacity: 0.7;
   margin: 45px auto;
   padding: 10px;
-  width: 350px;
-  height: 350px;
-  border: 1px dotted #df56d5;
+  width: 550px;
+  height: 550px;
 }
 </style>

@@ -3,7 +3,7 @@
 import { register } from 'register-service-worker'
 
 if (process.env.NODE_ENV === 'production') {
-  register(`https://ivanshavliuga.github.io/shulte2/service-worker.js`, {
+  register('https://ivanshavliuga.github.io/shulte2/service-worker.js', {
     ready () {
       console.log(
         'App is being served from cache by a service worker.\n' +
