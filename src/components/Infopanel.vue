@@ -14,9 +14,6 @@
       class="winner"
     >
       <span>You winner</span><br>
-      <button @click="nextlevel">
-        Next
-      </button>
     </div>
   </div>
 </template>
@@ -38,11 +35,6 @@ export default {
     count: {
       type: Number,
       default: 0
-    }
-  },
-  methods: {
-    nextlevel () {
-      this.$emit('next')
     }
   }
 }
