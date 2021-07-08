@@ -26,57 +26,41 @@
       :count="count"
       :winner="winner"
       :level="level"
-      @next="nextlevel"
     />
-    <!-- <div class="time">
-      {{ timedta+'' }}
-    </div> -->
   </section>
 </template>
 <script>
 import infopanel from './Infopanel.vue'
+import { mapGetters } from 'vuex'
 // import current from './../timer.js'
 
 export default {
   components: {
     infopanel
   },
-  data () {
-    return {
-      rows: [],
-      columns: [],
-      board: [],
-      checked: [],
-      scores: 0,
-      count: 0,
-      selnum: 0,
-      winner: false,
-      clickok: false,
-      level: 1
-      // timedta: '0.0.0'
-    }
+  computed: {
+    ...mapGetters([
+      'rows',
+      'columns',
+      'board',
+      'checked',
+      'scores',
+      'count',
+      'selnum',
+      'winner',
+      'clickok',
+      'msg',
+      'level'
+    ])
   },
   created () {
-    console.log(localStorage.shultebrlength)
-    if (localStorage.shultebrlength) {
-      for (let i = 0; i < localStorage.shultebrlength; i++) {
-        this.rows.push(i + 1)
-        this.columns.push(i + 1)
-      }
-    }
-    console.log(this.rows)
-    this.scores = (localStorage.shultescores) ? (+localStorage.shultescores) : (0)
-    this.level = (localStorage.shultelevel) ? (+localStorage.shultelevel) : (1)
-    this.generatenumbers()
-    // current.now()
-    // this.timedta = current.hour + ':' + current.minute + ':' + current.second
+    this.$store.dispatch('startApp')
   },
   methods: {
     draw (x, y, r) {
       return {
         animationDelay: (x < 5 && y < 5) ? ('0.' + r + '' + x + '' + y + 's') : ('1.' + x + '' + r + '' + y + 's'),
         background: '#' + x + '5' + r + '2' + y + '2'
-
       }
     },
     generatenumbers () {
@@ -100,38 +84,16 @@ export default {
       const cl = this.columns.length
       return this.board[x + y * cl]
     },
-    checkball (x, y) {
-      const cl = this.columns.length
+    checkball (px, py) {
       const bl = this.rows.length * this.columns.length
-      this.selnum = this.board[x + y * cl]
-      this.checked.push(this.selnum)
-      if (this.count < bl) {
-        if (this.selnum - this.count !== 1) {
-          this.scores -= 5
-          this.clickok = false
-        } else {
-          this.count++
-          this.scores += 5
-          this.board[x + y * cl] = 'OK'
-          this.clickok = true
-        }
-        if (this.count === bl) {
-          this.winner = true
-          // localStorage.level = this.level
-        }
+      const pos = {
+        x: px,
+        y: py
       }
-    },
-    nextlevel () {
-      this.rows.push(this.rows.length + 1)
-      this.columns.push(this.columns.length + 1)
-      this.board = []
-      this.generatenumbers()
-      this.level++
-      this.count = 0
-      this.winner = false
-      localStorage.shultebrlength = this.columns.length
-      localStorage.shultescores = this.scores
-      localStorage.shultelevel = this.level
+      this.$store.dispatch('checkBall', pos)
+      if (this.count === bl) {
+        this.$store.dispatch('nextLevel')
+      }
     },
     setnull () {
       localStorage.shultescores = 0
