@@ -1,5 +1,11 @@
 <template>
-  <section :style="'width: '+(260+level*40)+'px;'+'height: '+(280+level*40)+'px'">
+  <section :style="'width:' + (65 + columns.length * 40) + 'px; height: ' + (120 + rows.length * 40) + 'px'">
+    <infopanel
+      :scores="scores"
+      :count="count"
+      :winner="winner"
+      :level="level"
+    />
     <div
       v-for="(y,ky) in rows"
       :key="ky"
@@ -14,19 +20,13 @@
           :id="x-1+(y-1)*8"
           class="ball"
           :data-check="printnum(x-1,y-1)"
-          :style="draw(x+Math.floor(Math.random()%10),((x*y)+Math.floor(Math.random()%10))%10,y+Math.floor(Math.random()%10))"
+          :style="draw(x-1,y-1)"
           @click="checkball(x-1,y-1)"
         >
           {{ printnum(x-1,y-1) }}
         </div>
       </div>
     </div>
-    <infopanel
-      :scores="scores"
-      :count="count"
-      :winner="winner"
-      :level="level"
-    />
   </section>
 </template>
 <script>
@@ -57,10 +57,15 @@ export default {
     this.$store.dispatch('startApp')
   },
   methods: {
-    draw (x, y, r) {
+    draw (x, y) {
+      const cl = this.board[x + y * this.columns.length]
+      console.log(cl)
+      const red = (~~(Math.random() * 128) + cl) % 128 + 16
+      const blue = (~~(Math.random() * 128) + cl) % 128 + 16
+      const green = (~~(Math.random() * 128) + cl) % 128 + 16
       return {
-        animationDelay: (x < 5 && y < 5) ? ('0.' + r + '' + x + '' + y + 's') : ('1.' + x + '' + r + '' + y + 's'),
-        background: '#' + x + '5' + r + '2' + y + '2'
+        animationDelay: (x < 5 && y < 5) ? ('0.' + x + '' + y + 's') : ('1.' + x + '' + '' + y + 's'),
+        background: 'rgb(' + red + ',' + green + ',' + blue + ')'
       }
     },
     generatenumbers () {
@@ -81,8 +86,7 @@ export default {
       }
     },
     printnum (x, y) {
-      const cl = this.columns.length
-      return this.board[x + y * cl]
+      return this.board[x + y * this.columns.length]
     },
     checkball (px, py) {
       const bl = this.rows.length * this.columns.length
@@ -104,7 +108,13 @@ export default {
 }
 </script>
 <style scoped>
-
+section {
+  margin: auto;
+  background-color: rgba(170,90,200, 0.3);
+  padding: 15px;
+  border: 1px solid rgba(170,90,200, 0.3);
+  box-shadow: 0 0 5px 5px rgba(170,90,200, 0.3);
+}
 section > div {
     display: flex;
 }
@@ -149,6 +159,19 @@ section > div {
 .time {
   color: white;
   border: 1px solid red;
+}
+@media (max-width: 736px) {
+  .ball {
+      width: 30px;
+      height: 30px;
+      margin: 0;
+      border: 1px solid black;
+      animation: 2s opacityeff infinite;
+      cursor: pointer;
+  }
+  section {
+    padding: 0;
+  }
 }
 @keyframes opacityeff {
     0% {
