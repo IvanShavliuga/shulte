@@ -26,8 +26,17 @@ body {
   margin: 0;
   background-color: rgba(0,0,0, 0.7);
   padding: 10px;
-  width: 100vw;
+  min-width: 100vw;
+  max-width: 100%;
   min-height: 100vh;
   max-height: 100%;
+}
+@media (max-width: 736px) {
+  body {
+    overflow: hidden;
+  }
+  body > div {
+    overflow: hidden;
+  }
 }
 </style>

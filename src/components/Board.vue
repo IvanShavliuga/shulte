@@ -160,6 +160,19 @@ section > div {
   color: white;
   border: 1px solid red;
 }
+@media (max-width: 736px) {
+  .ball {
+      width: 30px;
+      height: 30px;
+      margin: 0;
+      border: 1px solid black;
+      animation: 2s opacityeff infinite;
+      cursor: pointer;
+  }
+  section {
+    padding: 0;
+  }
+}
 @keyframes opacityeff {
     0% {
         opacity:0.1;
