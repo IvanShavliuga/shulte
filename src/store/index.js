@@ -29,7 +29,7 @@ export default new Vuex.Store({
         state.loadflag = true
       } else {
         if (!state.createdflag) {
-          for (let i = 0; i < 5; i++) {
+          for (let i = 0; i < 4; i++) {
             state.rows.push(i + 1)
             state.columns.push(i + 1)
           }
