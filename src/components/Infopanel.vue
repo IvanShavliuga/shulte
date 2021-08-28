@@ -45,7 +45,8 @@ export default {
     word-spacing: 15px;
 }
 .select > div {
-    margin: 5px 10px;
+    margin: 5px 2px;
+    word-spacing: 2px;
 }
 .winner > button {
   border: 1px solid white;

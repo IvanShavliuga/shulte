@@ -17,6 +17,7 @@ export default new Vuex.Store({
     level: 1,
     loadflag: false,
     createdflag: false,
+    appVersion: '0.1.4',
     msg: ''
   },
   mutations: {
@@ -118,6 +119,7 @@ export default new Vuex.Store({
     winner: state => state.winner,
     clickok: state => state.clickok,
     msg: state => state.msg,
-    level: state => state.level
+    level: state => state.level,
+    appVersion: state => state.appVersion
   }
 })
