@@ -60,9 +60,9 @@ export default {
     draw (x, y) {
       const cl = this.board[x + y * this.columns.length]
       console.log(cl)
-      const red = (~~(Math.random() * 128) + cl) % 128 + 16
-      const blue = (~~(Math.random() * 128) + cl) % 128 + 16
-      const green = (~~(Math.random() * 128) + cl) % 128 + 16
+      const red = (~~(Math.random() * 128) + cl) % 128 + 32
+      const blue = (~~(Math.random() * 128) + cl) % 128 + 32
+      const green = (~~(Math.random() * 128) + cl) % 128 + 32
       return {
         animationDelay: (x < 5 && y < 5) ? ('0.' + x + '' + y + 's') : ('1.' + x + '' + '' + y + 's'),
         background: 'rgb(' + red + ',' + green + ',' + blue + ')'
@@ -110,7 +110,7 @@ export default {
 <style scoped>
 section {
   margin: auto;
-  background-color: rgba(170,90,200, 0.3);
+  background:  rgba(170,90,200, 0.3);
   padding: 15px;
   border: 1px solid rgba(170,90,200, 0.3);
   box-shadow: 0 0 5px 5px rgba(170,90,200, 0.3);
@@ -123,14 +123,14 @@ section > div {
     cursor: pointer;
 }
 .ball {
-    border-radius: 45%;
+    border-radius: 40%;
     width: 35px;
     height: 35px;
     color: yellow;
     text-align: center;
     line-height: 35px;
     margin: 3px;
-    border: 1px solid black;
+    border: 1px solid rgba(0,0,0,0.5);
     animation: 2s opacityeff infinite;
     cursor: pointer;
 }
@@ -164,7 +164,7 @@ section > div {
   .ball {
       width: 30px;
       height: 30px;
-      margin: 0;
+      margin: 2px;
       border: 1px solid black;
       animation: 2s opacityeff infinite;
       cursor: pointer;

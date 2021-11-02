@@ -17,15 +17,20 @@ export default {
 <!-- Use preprocessors via the lang attribute! e.g. <style lang="scss"> -->
 <style>
 body {
-  background: url(https://ivanshavliuga.github.io/simples/photos/my/ufo-r.jpg) rgba(120, 120, 120, 0.7);
-  background-size: cover;
+  background: rgba(0,0,0, 0.9);
   padding: 0;
   margin: 0;
 }
 .board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
-  background-color: rgba(0,0,0, 0.7);
-  padding: 10px;
+  background: url(https://ivanshavliuga.github.io/simples/photos/my/ufo-r.jpg) rgba(0,0,0, 0.9);
+  background-size: 99% 99%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 0;
   min-width: 100vw;
   max-width: 100%;
   min-height: 100vh;
