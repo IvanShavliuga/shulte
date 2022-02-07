@@ -13,7 +13,6 @@ Used vue.js and scss
 Прошлые реализации в каталоге ./archive/
 Проект создан в учебных целях для изучения vue.js
 
-https://isschavliuga.ucoz.net
 https://ivanshavliuga.github.io
 
 ``` bash
