@@ -1,6 +1,7 @@
 <template>
-  <section :style="'width:' + (65 + columns.length * 40) + 'px; height: ' + (120 + rows.length * 40) + 'px'">
+  <section :style="'width:' + (0 + columns.length * 35) + 'px; height: ' + (0 + rows.length * 35) + 'px'">
     <infopanel
+      class="infopanel"
       :scores="scores"
       :count="count"
       :winner="winner"
@@ -108,9 +109,20 @@ export default {
 }
 </script>
 <style scoped>
+.infopanel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background: rgba(210,20, 125,0.5);
+  color: yellow;
+  width: 100vw;
+}
 section {
+  position: relative;
   margin: auto;
-  background-color: rgba(170,90,200, 0.3);
+  margin-top: 50px;
+  background-color: rgba(170,90,200, 0.4);
   padding: 15px;
   border: 1px solid rgba(170,90,200, 0.3);
   box-shadow: 0 0 5px 5px rgba(170,90,200, 0.3);
@@ -124,12 +136,12 @@ section > div {
 }
 .ball {
     border-radius: 45%;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     color: yellow;
     text-align: center;
     line-height: 35px;
-    margin: 3px;
+    margin: 1px;
     border: 1px solid black;
     animation: 2s opacityeff infinite;
     cursor: pointer;
@@ -160,19 +172,7 @@ section > div {
   color: white;
   border: 1px solid red;
 }
-@media (max-width: 736px) {
-  .ball {
-      width: 30px;
-      height: 30px;
-      margin: 0;
-      border: 1px solid black;
-      animation: 2s opacityeff infinite;
-      cursor: pointer;
-  }
-  section {
-    padding: 0;
-  }
-}
+
 @keyframes opacityeff {
     0% {
         opacity:0.1;

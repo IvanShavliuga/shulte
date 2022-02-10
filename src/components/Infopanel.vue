@@ -1,19 +1,21 @@
 <template>
   <div class="select">
-    <div class="count">
-      Count: {{ count }}
-    </div>
-    <div class="scores">
-      Scores: {{ scores }}
-    </div>
-    <div class="level">
-      Level: {{ level }}
-    </div>
-    <div
-      v-if="winner"
-      class="winner"
-    >
-      <span>You winner</span><br>
+    <div>
+      <div class="count">
+        Count: {{ count }}
+      </div>
+      <div class="scores">
+        Scores: {{ scores }}
+      </div>
+      <div class="level">
+        Level: {{ level }}
+      </div>
+      <div
+        v-if="winner"
+        class="winner"
+      >
+        <span>You winner</span><br>
+      </div>
     </div>
   </div>
 </template>
@@ -45,7 +47,12 @@ export default {
     word-spacing: 15px;
 }
 .select > div {
-    margin: 5px 10px;
+    display: flex;
+    margin: 5px auto;
+    max-width: 35vw;
+}
+.select > div > div {
+  margin: 5px 15px;
 }
 .winner > button {
   border: 1px solid white;
