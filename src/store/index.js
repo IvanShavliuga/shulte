@@ -1,6 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+const MAX_LENGTH_BOARD = 13
+/**********************
+ * level | length | summ
+ * 1     | 4      | 4x4   = 16
+ * 2     | 5      | 5x5   = 25
+ * 3     | 6      | 6x6   = 36
+ * 4     | 7      | 7x7   = 49
+ * 5     | 8      | 8x8   = 64
+ * 6     | 9      | 9x9   = 81
+ * 7     | 10     | 10x10 = 100
+*/
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -21,21 +31,21 @@ export default new Vuex.Store({
   },
   mutations: {
     LOAD_GAME (state) {
-      if (localStorage.shultebrlength && !state.loadflag) {
+      /* if (localStorage.shultebrlength && !state.loadflag) {
         for (let i = 0; i < localStorage.shultebrlength; i++) {
           state.rows.push(i + 1)
           state.columns.push(i + 1)
         }
         state.loadflag = true
-      } else {
-        if (!state.createdflag) {
-          for (let i = 0; i < 4; i++) {
-            state.rows.push(i + 1)
-            state.columns.push(i + 1)
-          }
-          state.createdflag = true
+      } else { */
+      if (!state.createdflag) {
+        for (let i = 0; i < 10; i++) {
+          state.rows.push(i + 1)
+          state.columns.push(i + 1)
         }
+        state.createdflag = true
       }
+      // }
       state.scores = (localStorage.shultescores) ? (+localStorage.shultescores) : (0)
       state.level = (localStorage.shultelevel) ? (+localStorage.shultelevel) : (1)
     },
@@ -61,12 +71,14 @@ export default new Vuex.Store({
       localStorage.shultelevel = state.level
     },
     NEXT_LEVEL (state) {
-      state.rows.push(state.rows.length + 1)
-      state.columns.push(state.columns.length + 1)
-      state.board = []
-      state.level++
-      state.count = 0
-      state.winner = false
+      if (state.rows.length < MAX_LENGTH_BOARD) {
+        state.rows.push(state.rows.length + 1)
+        state.columns.push(state.columns.length + 1)
+        state.board = []
+        state.level++
+        state.count = 0
+        state.winner = false
+      }
     },
     SAVE_MSG (state) {
       state.msg = 'save'

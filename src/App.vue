@@ -1,8 +1,8 @@
 <!-- Use preprocessors via the lang attribute! e.g. <template lang="pug"> -->
 <template>
-  <div class="board">
+  <main class="board">
     <board />
-  </div>
+  </main>
 </template>
 
 <script>
@@ -17,19 +17,21 @@ export default {
 <!-- Use preprocessors via the lang attribute! e.g. <style lang="scss"> -->
 <style>
 body {
-  background: url(https://ivanshavliuga.github.io/simples/photos/my/ufo-r.jpg) rgba(120, 120, 120, 0.7);
-  background-size: cover;
+  background: url(https://ivanshavliuga.github.io/simples/photos/my/ufo-r.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center top;
+  overflow: hidden;
   padding: 0;
   margin: 0;
 }
 .board {
-  margin: 0;
-  background-color: rgba(0,0,0, 0.7);
-  padding: 10px;
-  min-width: 100vw;
-  max-width: 100%;
-  min-height: 100vh;
-  max-height: 100%;
+  margin: auto;
+  background-color: rgba(23,24,255, 0.2);
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 @media (max-width: 736px) {
   body {
