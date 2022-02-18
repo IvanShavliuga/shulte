@@ -1,21 +1,10 @@
 <template>
   <div class="select">
     <div>
-      <div class="count">
-        Count: {{ count }}
-      </div>
-      <div class="scores">
-        Scores: {{ scores }}
-      </div>
-      <div class="level">
-        Level: {{ level }}
-      </div>
-      <div
-        v-if="winner"
-        class="winner"
-      >
-        <span>You winner</span><br>
-      </div>
+      <div class="count">Count: {{ count }}</div>
+      <div class="scores">Scores: {{ scores }}</div>
+      <div class="level">Level: {{ level }}</div>
+      <div v-if="winner" class="winner"><span>You winner</span><br /></div>
     </div>
   </div>
 </template>
@@ -24,32 +13,32 @@ export default {
   props: {
     winner: {
       type: Boolean,
-      default: false
+      default: false,
     },
     level: {
       type: Number,
-      default: 0
+      default: 0,
     },
     scores: {
       type: Number,
-      default: 0
+      default: 0,
     },
     count: {
       type: Number,
-      default: 0
-    }
-  }
-}
+      default: 0,
+    },
+  },
+};
 </script>
 <style scoped>
 .select {
-    color: #fff;
-    word-spacing: 15px;
+  color: #fff;
+  word-spacing: 15px;
 }
 .select > div {
-    display: flex;
-    margin: 5px auto;
-    max-width: 35vw;
+  display: flex;
+  margin: 5px auto;
+  max-width: 35vw;
 }
 .select > div > div {
   margin: 5px 15px;

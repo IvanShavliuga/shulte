@@ -1,11 +1,5 @@
-import Vue from 'vue'
-import App from './App.vue'
-import store from './store'
-import './registerServiceWorker'
-// link for build: https://ivanshavliuga.github.io/shulte2/
-Vue.config.productionTip = false
+import { createApp } from "vue";
+import App from "./App.vue";
+import store from "./store";
 
-new Vue({
-  store,
-  render: h => h(App)
-}).$mount('#app')
+createApp(App).use(store).mount("#app");

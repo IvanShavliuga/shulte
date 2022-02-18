@@ -15,6 +15,11 @@ Used vue.js and scss
 
 https://ivanshavliuga.github.io
 
+## version 0.3.0
+
+Переход на третью версию Vue 3.0
+Изменение дизайна и интерфейса. 
+
 ``` bash
 
 # Project setup
