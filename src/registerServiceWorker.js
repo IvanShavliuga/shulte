@@ -1,33 +1,34 @@
 /* eslint-disable no-console */
 
-import { register } from 'register-service-worker'
-import { dispatch } from 'vuex'
+import { register } from "register-service-worker";
 
-if (process.env.NODE_ENV === 'production') {
-  register('https://ivanshavliuga.github.io/shulte2/service-worker.js', {
-    ready () {
+if (process.env.NODE_ENV === "production") {
+  register(`${process.env.BASE_URL}service-worker.js`, {
+    ready() {
       console.log(
-        'App is being served from cache by a service worker.\n' +
-        'For more details, visit https://goo.gl/AFskqB'
-      )
-      localStorage.appmessage = 'start app'
-      dispatch('startApp')
+        "App is being served from cache by a service worker.\n" +
+          "For more details, visit https://goo.gl/AFskqB"
+      );
     },
-    cached () {
-      localStorage.appmessage = 'cached app'
-      console.log('Content has been cached for offline use.')
+    registered() {
+      console.log("Service worker has been registered.");
     },
-    updated () {
-      localStorage.appmessage = 'updated app'
-      console.log('New content is available; please refresh.')
+    cached() {
+      console.log("Content has been cached for offline use.");
     },
-    offline () {
-      localStorage.appmessage = 'offline app'
-      console.log('No internet connection found. App is running in offline mode.')
+    updatefound() {
+      console.log("New content is downloading.");
     },
-    error (error) {
-      localStorage.appmessage = 'error app'
-      console.error('Error during service worker registration:', error)
-    }
-  })
+    updated() {
+      console.log("New content is available; please refresh.");
+    },
+    offline() {
+      console.log(
+        "No internet connection found. App is running in offline mode."
+      );
+    },
+    error(error) {
+      console.error("Error during service worker registration:", error);
+    },
+  });
 }

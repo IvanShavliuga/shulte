@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import board from '../components/Board.vue'
+import board from "../components/Board.vue";
 export default {
   components: {
-    board
-  }
-}
+    board,
+  },
+};
 </script>
