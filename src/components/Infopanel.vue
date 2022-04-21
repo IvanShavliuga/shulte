@@ -49,4 +49,17 @@ export default {
   padding: 3px 7px;
   color: yellow;
 }
+@media screen and (max-width: 400px) {
+  .select {
+    word-spacing: 5px;
+  }
+  .select > div {
+    display: flex;
+    margin: 5px auto;
+    max-width: 100vw;
+  }
+  .select > div > div {
+    margin: 5px;
+  }
+}
 </style>
