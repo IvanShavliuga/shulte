@@ -1,6 +1,6 @@
 {
-  "name": "shulte-beta",
-  "version": "0.3.0",
+  "name": "ivshulte-beta",
+  "version": "0.3.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

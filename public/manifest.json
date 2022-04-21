@@ -1,6 +1,6 @@
 {
-  "name": "iv2shulte",
-  "short_name": "iv2shulte",
+  "name": "ivshulte",
+  "short_name": "ivshulte",
   "icons": [
     {
       "src": "https://ivanshavliuga.github.io/shulte2/img/icons/iv2-128x128.png",
@@ -16,5 +16,6 @@
   "start_url": "https://ivanshavliuga.github.io/shulte2/index.html",
   "display": "fullscreen",
   "background_color": "#232323",
-  "theme_color": "#333333"
+  "theme_color": "#333333",
+  "orientation": "portrait"
 }

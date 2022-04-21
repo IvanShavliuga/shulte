@@ -163,8 +163,6 @@ section > div {
   width: 35px;
   height: 35px;
   color: yellow;
-  text-align: center;
-  line-height: 35px;
   margin: 3px;
   border: 1px solid black;
   opacity: 0.7;
@@ -180,7 +178,20 @@ section > div {
   color: white;
   border: 1px solid red;
 }
-
+@media screen and (max-width: 400px) {
+  .ball {
+    width: 25px;
+    height: 25px;
+    line-height: 23px;
+  }
+  .check {
+    width: 30px;
+    height: 30px;
+  }
+  section {
+    padding: 5px;
+  }
+}
 @keyframes opacityeff {
   0% {
     opacity: 0.1;
