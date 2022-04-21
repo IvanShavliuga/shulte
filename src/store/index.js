@@ -51,11 +51,24 @@ export default new createStore({
     },
     GEN_LEVEL(state) {
       let i = 0;
+      const colors = [
+        { red: 190, green: 20, blue: 20 },
+        { red: 20, green: 190, blue: 20 },
+        { red: 20, green: 20, blue: 190 },
+        { red: 190, green: 20, blue: 190 },
+        { red: 190, green: 190, blue: 20 },
+        { red: 20, green: 140, blue: 190 },
+        { red: 190, green: 100, blue: 20 },
+      ];
       const bl = state.rows.length * state.columns.length;
       for (let y = 0; y < state.rows.length; y++) {
         for (let x = 0; x < state.columns.length; x++) {
           i++;
-          state.board.push(i);
+          state.board.push({
+            value: i,
+            status: "init",
+            color: colors[i % colors.length],
+          });
         }
       }
       for (i = 0; i < bl; i++) {
@@ -87,7 +100,7 @@ export default new createStore({
       const cl = state.columns.length;
       const bl = state.rows.length * state.columns.length;
       const posbr = obj.x + obj.y * cl;
-      state.selnum = state.board[posbr];
+      state.selnum = state.board[posbr].value;
       state.checked.push(state.selnum);
       if (state.count < bl) {
         if (state.selnum - state.count !== 1) {
@@ -96,7 +109,7 @@ export default new createStore({
         } else {
           state.count++;
           state.scores += 5;
-          state.board[posbr] = "OK";
+          state.board[posbr].status = "OK";
           state.clickok = true;
         }
       }
