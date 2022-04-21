@@ -25,11 +25,11 @@
         <div
           :id="x - 1 + (y - 1) * 8"
           class="ball"
-          :data-check="printnum(x - 1, y - 1)"
+          :data-check="printnum(x - 1, y - 1).status"
           :style="draw(x - 1, y - 1)"
           @click="checkball(x - 1, y - 1)"
         >
-          {{ printnum(x - 1, y - 1) }}
+          {{ printnum(x - 1, y - 1).value }}
         </div>
       </div>
     </div>
@@ -65,16 +65,17 @@ export default {
   methods: {
     draw(x, y) {
       const cl = this.board[x + y * this.columns.length];
-      console.log(cl);
-      const red = ((~~(Math.random() * 128) + cl) % 128) + 16;
-      const blue = ((~~(Math.random() * 128) + cl) % 128) + 16;
-      const green = ((~~(Math.random() * 128) + cl) % 128) + 16;
+      const delay = Math.random() * 3 + 1;
       return {
-        animationDelay:
-          x < 5 && y < 5
-            ? "0." + x + "" + y + "s"
-            : "1." + x + "" + "" + y + "s",
-        background: "rgb(" + red + "," + green + "," + blue + ")",
+        animationDelay: delay + "s",
+        background:
+          "rgb(" +
+          cl.color.red +
+          "," +
+          cl.color.green +
+          "," +
+          cl.color.blue +
+          ")",
       };
     },
     generatenumbers() {
@@ -143,23 +144,25 @@ section > div {
   cursor: pointer;
 }
 .ball {
-  border-radius: 45%;
+  border-radius: 35%;
   width: 30px;
   height: 30px;
   color: yellow;
   text-align: center;
-  line-height: 35px;
+  line-height: 27px;
+  letter-spacing: 1px;
   margin: 1px;
-  border: 1px solid black;
+  border: 1px dashed black;
   animation: 2s opacityeff infinite;
   cursor: pointer;
 }
 .ball[data-check="OK"] {
   border: 1px solid white;
-  color: white;
+  color: purple;
+  background-color: silver !important;
 }
 .check {
-  border-radius: 45%;
+  border-radius: 25%;
   width: 35px;
   height: 35px;
   color: yellow;
@@ -182,7 +185,6 @@ section > div {
   .ball {
     width: 25px;
     height: 25px;
-    line-height: 23px;
   }
   .check {
     width: 30px;
@@ -194,11 +196,11 @@ section > div {
 }
 @keyframes opacityeff {
   0% {
-    opacity: 0.1;
+    opacity: 0.8;
     transform: rotateZ(45deg);
   }
   25% {
-    opacity: 0.4;
+    opacity: 0.6;
     transform: rotateZ(5deg);
   }
   50% {
@@ -206,7 +208,7 @@ section > div {
     transform: rotateZ(0deg);
   }
   75% {
-    opacity: 0.8;
+    opacity: 0.6;
     transform: rotateZ(135deg);
   }
   100% {
