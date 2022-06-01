@@ -31,13 +31,6 @@ export default new createStore({
   },
   mutations: {
     LOAD_GAME(state) {
-      /* if (localStorage.shultebrlength && !state.loadflag) {
-          for (let i = 0; i < localStorage.shultebrlength; i++) {
-            state.rows.push(i + 1)
-            state.columns.push(i + 1)
-          }
-          state.loadflag = true
-        } else { */
       if (!state.createdflag) {
         for (let i = 0; i < 10; i++) {
           state.rows.push(i + 1);
@@ -45,9 +38,10 @@ export default new createStore({
         }
         state.createdflag = true;
       }
-      // }
-      state.scores = localStorage.shultescores ? +localStorage.shultescores : 0;
-      state.level = localStorage.shultelevel ? +localStorage.shultelevel : 1;
+      state.scores = localStorage.ivShultescores
+        ? +localStorage.ivShultescores
+        : 0;
+      // state.level = localStorage.shultelevel ? +localStorage.shultelevel : 1;
     },
     GEN_LEVEL(state) {
       let i = 0;
@@ -79,9 +73,9 @@ export default new createStore({
       }
     },
     SAVE_GAME(state) {
-      localStorage.shultebrlength = state.columns.length;
-      localStorage.shultescores = state.scores;
-      localStorage.shultelevel = state.level;
+      localStorage.ivShultebrlength = state.columns.length;
+      localStorage.ivShultescores = state.scores;
+      // localStorage.shultelevel = state.level;
     },
     NEXT_LEVEL(state) {
       if (state.rows.length < MAX_LENGTH_BOARD) {
@@ -122,7 +116,7 @@ export default new createStore({
     },
     nextLevel({ commit }) {
       commit("SAVE_GAME");
-      commit("NEXT_LEVEL");
+      // commit("NEXT_LEVEL");
       commit("GEN_LEVEL");
     },
     testApp({ commit }) {

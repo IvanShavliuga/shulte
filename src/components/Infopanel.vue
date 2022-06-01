@@ -3,7 +3,6 @@
     <div>
       <div class="count">Count: {{ count }}</div>
       <div class="scores">Scores: {{ scores }}</div>
-      <div class="level">Level: {{ level }}</div>
       <div v-if="winner" class="winner"><span>You winner</span><br /></div>
     </div>
   </div>
