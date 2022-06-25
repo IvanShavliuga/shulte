@@ -1,6 +1,6 @@
 {
   "name": "ivshulte-beta",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -30,7 +30,6 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "prettier": "^2.2.1",
-    "typescript": "~3.9.3",
     "vue-jest": "^5.0.0-0"
   },
   "eslintConfig": {
