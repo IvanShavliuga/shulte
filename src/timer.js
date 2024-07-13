@@ -4,15 +4,15 @@ export default {
     minute: 0,
     second: 0,
     now: () => {
-      const d = new Date();
-      this.hour = d.getHours();
-      this.minute = d.getMinutes();
-      this.second = d.getSeconds();
+      const d = new Date()
+      this.hour = d.getHours()
+      this.minute = d.getMinutes()
+      this.second = d.getSeconds()
       /* $("#timer").text(this.hour+":" +this.minute+":"+this.second);
        */
-    },
-  },
-};
+    }
+  }
+}
 /* window.onload = function () {
   /* setInterval(()=>{
  let dt=new Date();

@@ -8,14 +8,14 @@ export default {
   props: {
     barlength: {
       type: Number,
-      default: 0,
+      default: 0
     },
     barpos: {
       type: Number,
-      default: 0,
-    },
-  },
-};
+      default: 0
+    }
+  }
+}
 </script>
 <style scoped>
 .bar {

@@ -12,22 +12,22 @@ export default {
   props: {
     winner: {
       type: Boolean,
-      default: false,
+      default: false
     },
     level: {
       type: Number,
-      default: 0,
+      default: 0
     },
     scores: {
       type: Number,
-      default: 0,
+      default: 0
     },
     count: {
       type: Number,
-      default: 0,
-    },
-  },
-};
+      default: 0
+    }
+  }
+}
 </script>
 <style scoped>
 .select {
