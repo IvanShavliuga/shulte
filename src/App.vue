@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import board from "@/components/Board.vue";
+import board from '@/components/Board.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    board,
-  },
-};
+    board
+  }
+}
 </script>
 
 <style lang="less">
