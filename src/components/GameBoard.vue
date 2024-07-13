@@ -38,11 +38,12 @@
   <div>test</div>
 </div>
 </template>
-<script>
+<script setup lang="ts">
 // import infopanel from './Infopanel.vue'
 // // import { mapGetters } from 'vuex'
-// // import current from './../timer.js'
-
+import { Timer } from './../timer'
+const t = new Timer()
+t.start('interval')
 // export default {
 //   components: {
 //     infopanel
