@@ -24,6 +24,6 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 start new version 0.4.0
-[*] vue3 composition api
-[*] pinia
-[*] typescript
+* vue3 composition api
+* pinia
+* typescript
