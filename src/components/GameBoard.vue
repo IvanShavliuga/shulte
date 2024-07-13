@@ -1,5 +1,6 @@
 <template>
-  <section
+<div>
+  <!-- <section
     :style="
       'width:' +
       (0 + columns.length * 35) +
@@ -8,7 +9,7 @@
       'px'
     "
   >
-    <infopanel
+    <game-infopanel
       class="infopanel"
       :scores="scores"
       :count="count"
@@ -33,89 +34,91 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
+  <div>test</div>
+</div>
 </template>
 <script>
-import infopanel from './Infopanel.vue'
-import { mapGetters } from 'vuex'
-// import current from './../timer.js'
+// import infopanel from './Infopanel.vue'
+// // import { mapGetters } from 'vuex'
+// // import current from './../timer.js'
 
-export default {
-  components: {
-    infopanel
-  },
-  computed: {
-    ...mapGetters([
-      'rows',
-      'columns',
-      'board',
-      'checked',
-      'scores',
-      'count',
-      'selnum',
-      'winner',
-      'clickok',
-      'msg',
-      'level'
-    ])
-  },
-  created () {
-    this.$store.dispatch('startApp')
-  },
-  methods: {
-    draw (x, y) {
-      const cl = this.board[x + y * this.columns.length]
-      const delay = Math.random() * 3 + 1
-      return {
-        animationDelay: delay + 's',
-        background:
-          'rgb(' +
-          cl.color.red +
-          ',' +
-          cl.color.green +
-          ',' +
-          cl.color.blue +
-          ')'
-      }
-    },
-    generatenumbers () {
-      let i = 0
-      const bl = this.rows.length * this.columns.length
+// export default {
+//   components: {
+//     infopanel
+//   },
+//   computed: {
+//     ...mapGetters([
+//       'rows',
+//       'columns',
+//       'board',
+//       'checked',
+//       'scores',
+//       'count',
+//       'selnum',
+//       'winner',
+//       'clickok',
+//       'msg',
+//       'level'
+//     ])
+//   },
+//   created () {
+//     this.$store.dispatch('startApp')
+//   },
+//   methods: {
+//     draw (x, y) {
+//       const cl = this.board[x + y * this.columns.length]
+//       const delay = Math.random() * 3 + 1
+//       return {
+//         animationDelay: delay + 's',
+//         background:
+//           'rgb(' +
+//           cl.color.red +
+//           ',' +
+//           cl.color.green +
+//           ',' +
+//           cl.color.blue +
+//           ')'
+//       }
+//     },
+//     generatenumbers () {
+//       let i = 0
+//       const bl = this.rows.length * this.columns.length
 
-      for (let y = 0; y < this.rows.length; y++) {
-        for (let x = 0; x < this.columns.length; x++) {
-          i++
-          this.board.push(i)
-        }
-      }
-      for (i = 0; i < bl; i++) {
-        const b = this.board[i]
-        const ni = Math.floor(Math.random() * bl)
-        this.board[i] = this.board[ni]
-        this.board[ni] = b
-      }
-    },
-    printnum (x, y) {
-      return this.board[x + y * this.columns.length]
-    },
-    checkball (px, py) {
-      const bl = this.rows.length * this.columns.length
-      const pos = {
-        x: px,
-        y: py
-      }
-      this.$store.dispatch('checkBall', pos)
-      if (this.count === bl) {
-        this.$store.dispatch('nextLevel')
-      }
-    },
-    setnull () {
-      localStorage.shultescores = 0
-      localStorage.shultelevel = 1
-      localStorage.shultebrlength = 5
-    }
-  }
-}
+//       for (let y = 0; y < this.rows.length; y++) {
+//         for (let x = 0; x < this.columns.length; x++) {
+//           i++
+//           this.board.push(i)
+//         }
+//       }
+//       for (i = 0; i < bl; i++) {
+//         const b = this.board[i]
+//         const ni = Math.floor(Math.random() * bl)
+//         this.board[i] = this.board[ni]
+//         this.board[ni] = b
+//       }
+//     },
+//     printnum (x, y) {
+//       return this.board[x + y * this.columns.length]
+//     },
+//     checkball (px, py) {
+//       const bl = this.rows.length * this.columns.length
+//       const pos = {
+//         x: px,
+//         y: py
+//       }
+//       this.$store.dispatch('checkBall', pos)
+//       if (this.count === bl) {
+//         this.$store.dispatch('nextLevel')
+//       }
+//     },
+//     setnull () {
+//       localStorage.shultescores = 0
+//       localStorage.shultelevel = 1
+//       localStorage.shultebrlength = 5
+//     }
+//   }
+// }
 </script>
 <style scoped>
 .infopanel {
