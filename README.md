@@ -1,4 +1,4 @@
-# shulte-new-app-3
+# shulte
 
 ## Project setup
 ```
@@ -22,3 +22,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+start new version 0.4.0
+[*] vue3 composition api
+[*] pinia
+[*] typescript
