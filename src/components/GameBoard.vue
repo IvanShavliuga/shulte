@@ -26,11 +26,11 @@
         <div
           :id="x - 1 + (y - 1) * 8"
           class="ball"
-          :data-check="printnum(x - 1, y - 1).status"
+          :data-check="printnum(x - 1, y - 1)"
           :style="draw(x - 1, y - 1)"
-          @click="checkball(x - 1, y - 1)"
+          @click="selectBall(x - 1, y - 1)"
         >
-          {{ printnum(x - 1, y - 1).value }}
+          {{ printnum(x - 1, y - 1) }}
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@ import { Timer } from './../timer'
 const t = new Timer()
 t.start('interval')
 const store = useGameStore()
-const { game, genLevel } = store
+const { game, genLevel, checkBall } = store
 console.log(store)
 console.log(game)
 function draw (x:number, y:number) {
@@ -63,15 +63,17 @@ function draw (x:number, y:number) {
   }
 }
 function printnum (x:number, y:number) {
-  return game.board[x + y * game.columns.length]
+  const b = game.board[x + y * game.columns.length]
+  return b.status === 'OK' ? 'OK' : b.value
 }
-function checkball (px:number, py:number) {
+function selectBall (px:number, py:number) {
   const bl = game.rows.length * game.columns.length
   const pos = {
     x: px,
     y: py
   }
-  // game.$store.dispatch('checkBall', pos)
+  checkBall(pos)
+  // game.$store.dispatch('selectBall', pos)
   // if (game.count === bl) {
   //   game.$store.dispatch('nextLevel')
   // }

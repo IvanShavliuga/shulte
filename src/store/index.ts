@@ -8,6 +8,10 @@ type Board = {
     blue: number;
   }
 }[]
+type CheckBall = {
+  x: number;
+  y: number;
+}
 class ShulteGame {
   constructor () {
     this.genLevel()
@@ -16,7 +20,7 @@ class ShulteGame {
   rows:number[] = [];
   columns:number[] = [];
   board:Board = [];
-  checked = [];
+  checked:number[] = [];
   scores = 0;
   count = 0;
   selnum = 0;
@@ -67,6 +71,25 @@ class ShulteGame {
       this.board[ni] = b
     }
   }
+
+  checkBall (ball:CheckBall) {
+    const cl = this.columns.length
+    const bl = this.rows.length * this.columns.length
+    const posbr = ball.x + ball.y * cl
+    this.selnum = this.board[posbr].value
+    this.checked.push(this.selnum)
+    if (this.count < bl) {
+      if (this.selnum - this.count !== 1) {
+        this.scores -= 5
+        this.clickok = false
+      } else {
+        this.count++
+        this.scores += 5
+        this.board[posbr].status = 'OK'
+        this.clickok = true
+      }
+    }
+  }
 }
 
 export const useGameStore = defineStore('game', {
@@ -77,6 +100,9 @@ export const useGameStore = defineStore('game', {
   actions: {
     genLevel () {
       this.gameData.genLevel()
+    },
+    checkBall (ball:CheckBall) {
+      this.gameData.checkBall(ball)
     }
   }
 })
