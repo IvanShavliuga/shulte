@@ -40,10 +40,15 @@
 </template>
 <script setup lang="ts">
 // import infopanel from './Infopanel.vue'
-// // import { mapGetters } from 'vuex'
+import { useGameStore } from '@/store/index'
 import { Timer } from './../timer'
 const t = new Timer()
 t.start('interval')
+const store = useGameStore()
+// store.init()
+const { game, genLevel } = store
+console.log(store)
+console.log(game)
 // export default {
 //   components: {
 //     infopanel
