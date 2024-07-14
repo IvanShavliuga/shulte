@@ -1,28 +1,28 @@
 <template>
 <div>
-  <!-- <section
-    :style="
+ <section
+ :style="
       'width:' +
-      (0 + columns.length * 35) +
+      (0 + game.columns.length * 35) +
       'px; height: ' +
-      (0 + rows.length * 35) +
+      (0 + game.rows.length * 35) +
       'px'
     "
   >
     <game-infopanel
       class="infopanel"
-      :scores="scores"
-      :count="count"
-      :winner="winner"
-      :level="level"
+      :scores="game.scores"
+      :count="game.count"
+      :winner="game.winner"
+      :level="game.level"
     />
     <div
-      v-for="(y, ky) in rows"
+      v-for="(y, ky) in game.rows"
       :key="ky"
-      :style="'width: ' + rows.length * 45 + 'px'"
+      :style="'width: ' + game.rows.length * 45 + 'px'"
       class="row"
     >
-      <div v-for="(x, kx) in columns" :key="kx">
+      <div v-for="(x, kx) in game.columns" :key="kx">
         <div
           :id="x - 1 + (y - 1) * 8"
           class="ball"
@@ -34,8 +34,7 @@
         </div>
       </div>
     </div>
-  </section> -->
-  <div>test</div>
+  </section>
 </div>
 </template>
 <script setup lang="ts">
@@ -72,57 +71,57 @@ console.log(game)
 //     this.$store.dispatch('startApp')
 //   },
 //   methods: {
-//     draw (x, y) {
-//       const cl = this.board[x + y * this.columns.length]
-//       const delay = Math.random() * 3 + 1
-//       return {
-//         animationDelay: delay + 's',
-//         background:
-//           'rgb(' +
-//           cl.color.red +
-//           ',' +
-//           cl.color.green +
-//           ',' +
-//           cl.color.blue +
-//           ')'
-//       }
-//     },
-//     generatenumbers () {
-//       let i = 0
-//       const bl = this.rows.length * this.columns.length
+function draw (x:number, y:number) {
+  const cl = game.board[x + y * game.columns.length]
+  const delay = Math.random() * 3 + 1
+  return {
+    animationDelay: delay + 's',
+    background:
+          'rgb(' +
+          cl.color.red +
+          ',' +
+          cl.color.green +
+          ',' +
+          cl.color.blue +
+          ')'
+  }
+}
+// function generatenumbers () {
+//   let i = 0
+//   const bl = game.rows.length * game.columns.length
 
-//       for (let y = 0; y < this.rows.length; y++) {
-//         for (let x = 0; x < this.columns.length; x++) {
-//           i++
-//           this.board.push(i)
-//         }
-//       }
-//       for (i = 0; i < bl; i++) {
-//         const b = this.board[i]
-//         const ni = Math.floor(Math.random() * bl)
-//         this.board[i] = this.board[ni]
-//         this.board[ni] = b
-//       }
-//     },
-//     printnum (x, y) {
-//       return this.board[x + y * this.columns.length]
-//     },
-//     checkball (px, py) {
-//       const bl = this.rows.length * this.columns.length
-//       const pos = {
-//         x: px,
-//         y: py
-//       }
-//       this.$store.dispatch('checkBall', pos)
-//       if (this.count === bl) {
-//         this.$store.dispatch('nextLevel')
-//       }
-//     },
-//     setnull () {
-//       localStorage.shultescores = 0
-//       localStorage.shultelevel = 1
-//       localStorage.shultebrlength = 5
+//   for (let y = 0; y < game.rows.length; y++) {
+//     for (let x = 0; x < game.columns.length; x++) {
+//       i++
+//       game.board.push(i)
 //     }
+//   }
+//   for (i = 0; i < bl; i++) {
+//     const b = game.board[i]
+//     const ni = Math.floor(Math.random() * bl)
+//     game.board[i] = game.board[ni]
+//     game.board[ni] = b
+//   }
+// }
+function printnum (x:number, y:number) {
+  return game.board[x + y * game.columns.length]
+}
+function checkball (px:number, py:number) {
+  const bl = game.rows.length * game.columns.length
+  const pos = {
+    x: px,
+    y: py
+  }
+  // game.$store.dispatch('checkBall', pos)
+  // if (game.count === bl) {
+  //   game.$store.dispatch('nextLevel')
+  // }
+}
+function setnull () {
+  localStorage.shultescores = 0
+  localStorage.shultelevel = 1
+  localStorage.shultebrlength = 5
+}
 //   }
 // }
 </script>
