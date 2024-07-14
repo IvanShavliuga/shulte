@@ -1,7 +1,7 @@
 <template>
 <div>
  <section
- :style="
+    :style="
       'width:' +
       (0 + game.columns.length * 35) +
       'px; height: ' +
@@ -44,33 +44,9 @@ import { Timer } from './../timer'
 const t = new Timer()
 t.start('interval')
 const store = useGameStore()
-// store.init()
 const { game, genLevel } = store
 console.log(store)
 console.log(game)
-// export default {
-//   components: {
-//     infopanel
-//   },
-//   computed: {
-//     ...mapGetters([
-//       'rows',
-//       'columns',
-//       'board',
-//       'checked',
-//       'scores',
-//       'count',
-//       'selnum',
-//       'winner',
-//       'clickok',
-//       'msg',
-//       'level'
-//     ])
-//   },
-//   created () {
-//     this.$store.dispatch('startApp')
-//   },
-//   methods: {
 function draw (x:number, y:number) {
   const cl = game.board[x + y * game.columns.length]
   const delay = Math.random() * 3 + 1
@@ -86,23 +62,6 @@ function draw (x:number, y:number) {
           ')'
   }
 }
-// function generatenumbers () {
-//   let i = 0
-//   const bl = game.rows.length * game.columns.length
-
-//   for (let y = 0; y < game.rows.length; y++) {
-//     for (let x = 0; x < game.columns.length; x++) {
-//       i++
-//       game.board.push(i)
-//     }
-//   }
-//   for (i = 0; i < bl; i++) {
-//     const b = game.board[i]
-//     const ni = Math.floor(Math.random() * bl)
-//     game.board[i] = game.board[ni]
-//     game.board[ni] = b
-//   }
-// }
 function printnum (x:number, y:number) {
   return game.board[x + y * game.columns.length]
 }
@@ -122,8 +81,6 @@ function setnull () {
   localStorage.shultelevel = 1
   localStorage.shultebrlength = 5
 }
-//   }
-// }
 </script>
 <style scoped>
 .infopanel {
