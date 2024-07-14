@@ -1,7 +1,8 @@
 <template>
   <div class="select">
     <div>
-      <div class="count">Count: {{ count }}</div>
+      <div class="count">Level: {{ level }}</div>
+       <div class="count">Count: {{ count }}</div>
       <div class="scores">Scores: {{ scores }}</div>
       <div v-if="winner" class="winner"><span>You winner</span><br /></div>
     </div>
@@ -37,7 +38,7 @@ export default {
 .select > div {
   display: flex;
   margin: 5px auto;
-  max-width: 35vw;
+  max-width: 40vw;
 }
 .select > div > div {
   margin: 5px 15px;

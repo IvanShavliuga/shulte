@@ -14,6 +14,13 @@ type CheckBall = {
 }
 class ShulteGame {
   constructor () {
+    const level = localStorage.getItem('shulteLevel')
+    const scores = localStorage.getItem('shulteScores')
+    if (level && scores) {
+      this.level = +level
+      this.scores = +scores
+      this.count = (this.level - 1) * 100
+    }
     this.genLevel()
   }
 
@@ -101,6 +108,8 @@ class ShulteGame {
       this.board = []
       this.count = (this.level - 1) * 100
       this.genLevel()
+      localStorage.setItem('shulteLevel', '' + this.level)
+      localStorage.setItem('shulteScores', '' + this.scores)
     }
   }
 }

@@ -59,7 +59,8 @@ function draw (x:number, y:number) {
           cl.color.green +
           ',' +
           cl.color.blue +
-          ')'
+          ')',
+    fontSize: game.count >= 1000 ? '10px' : 'auto'
   }
 }
 function printnum (x:number, y:number) {
@@ -110,6 +111,7 @@ section > div {
   cursor: pointer;
 }
 .ball {
+  font-size: 14px;
   border-radius: 35%;
   width: 30px;
   height: 30px;
