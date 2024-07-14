@@ -38,7 +38,7 @@
 </div>
 </template>
 <script setup lang="ts">
-// import infopanel from './Infopanel.vue'
+import GameInfopanel from './GameInfopanel.vue'
 import { useGameStore } from '@/store/index'
 import { Timer } from './../timer'
 const t = new Timer()
