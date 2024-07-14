@@ -1,124 +1,88 @@
 <template>
 <div>
-  <!-- <section
+ <section
     :style="
       'width:' +
-      (0 + columns.length * 35) +
+      (0 + game.columns.length * 35) +
       'px; height: ' +
-      (0 + rows.length * 35) +
+      (0 + game.rows.length * 35) +
       'px'
     "
   >
     <game-infopanel
       class="infopanel"
-      :scores="scores"
-      :count="count"
-      :winner="winner"
-      :level="level"
+      :scores="game.scores"
+      :count="game.count"
+      :winner="game.winner"
+      :level="game.level"
     />
     <div
-      v-for="(y, ky) in rows"
+      v-for="(y, ky) in game.rows"
       :key="ky"
-      :style="'width: ' + rows.length * 45 + 'px'"
+      :style="'width: ' + game.rows.length * 45 + 'px'"
       class="row"
     >
-      <div v-for="(x, kx) in columns" :key="kx">
+      <div v-for="(x, kx) in game.columns" :key="kx">
         <div
           :id="x - 1 + (y - 1) * 8"
           class="ball"
-          :data-check="printnum(x - 1, y - 1).status"
+          :data-check="printnum(x - 1, y - 1)"
           :style="draw(x - 1, y - 1)"
-          @click="checkball(x - 1, y - 1)"
+          @click="selectBall(x - 1, y - 1)"
         >
-          {{ printnum(x - 1, y - 1).value }}
+          {{ printnum(x - 1, y - 1) }}
         </div>
       </div>
     </div>
-  </section> -->
-  <div>test</div>
+  </section>
 </div>
 </template>
-<script>
-// import infopanel from './Infopanel.vue'
-// // import { mapGetters } from 'vuex'
-// // import current from './../timer.js'
-
-// export default {
-//   components: {
-//     infopanel
-//   },
-//   computed: {
-//     ...mapGetters([
-//       'rows',
-//       'columns',
-//       'board',
-//       'checked',
-//       'scores',
-//       'count',
-//       'selnum',
-//       'winner',
-//       'clickok',
-//       'msg',
-//       'level'
-//     ])
-//   },
-//   created () {
-//     this.$store.dispatch('startApp')
-//   },
-//   methods: {
-//     draw (x, y) {
-//       const cl = this.board[x + y * this.columns.length]
-//       const delay = Math.random() * 3 + 1
-//       return {
-//         animationDelay: delay + 's',
-//         background:
-//           'rgb(' +
-//           cl.color.red +
-//           ',' +
-//           cl.color.green +
-//           ',' +
-//           cl.color.blue +
-//           ')'
-//       }
-//     },
-//     generatenumbers () {
-//       let i = 0
-//       const bl = this.rows.length * this.columns.length
-
-//       for (let y = 0; y < this.rows.length; y++) {
-//         for (let x = 0; x < this.columns.length; x++) {
-//           i++
-//           this.board.push(i)
-//         }
-//       }
-//       for (i = 0; i < bl; i++) {
-//         const b = this.board[i]
-//         const ni = Math.floor(Math.random() * bl)
-//         this.board[i] = this.board[ni]
-//         this.board[ni] = b
-//       }
-//     },
-//     printnum (x, y) {
-//       return this.board[x + y * this.columns.length]
-//     },
-//     checkball (px, py) {
-//       const bl = this.rows.length * this.columns.length
-//       const pos = {
-//         x: px,
-//         y: py
-//       }
-//       this.$store.dispatch('checkBall', pos)
-//       if (this.count === bl) {
-//         this.$store.dispatch('nextLevel')
-//       }
-//     },
-//     setnull () {
-//       localStorage.shultescores = 0
-//       localStorage.shultelevel = 1
-//       localStorage.shultebrlength = 5
-//     }
-//   }
-// }
+<script setup lang="ts">
+import GameInfopanel from './GameInfopanel.vue'
+import { useGameStore } from '@/store/index'
+import { Timer } from './../timer'
+const t = new Timer()
+t.start('interval')
+const store = useGameStore()
+const { game, genLevel, checkBall } = store
+console.log(store)
+console.log(game)
+function draw (x:number, y:number) {
+  const cl = game.board[x + y * game.columns.length]
+  const delay = Math.random() * 3 + 1
+  return {
+    animationDelay: delay + 's',
+    background:
+          'rgb(' +
+          cl.color.red +
+          ',' +
+          cl.color.green +
+          ',' +
+          cl.color.blue +
+          ')',
+    fontSize: game.count >= 1000 ? '10px' : 'auto'
+  }
+}
+function printnum (x:number, y:number) {
+  const b = game.board[x + y * game.columns.length]
+  return b.status === 'OK' ? 'OK' : b.value
+}
+function selectBall (px:number, py:number) {
+  const bl = game.rows.length * game.columns.length
+  const pos = {
+    x: px,
+    y: py
+  }
+  checkBall(pos)
+  // if (game.count === bl) {
+  //   game.$store.dispatch('nextLevel')
+  // }
+}
+function setnull () {
+  localStorage.shultescores = 0
+  localStorage.shultelevel = 1
+  localStorage.shultebrlength = 5
+}
 </script>
 <style scoped>
 .infopanel {
@@ -127,7 +91,7 @@
   left: 0;
   z-index: 50;
   background: rgba(210, 20, 125, 0.5);
-  color: yellow;
+  color: white;
   width: 100vw;
 }
 section {
@@ -147,10 +111,11 @@ section > div {
   cursor: pointer;
 }
 .ball {
+  font-size: 14px;
   border-radius: 35%;
   width: 30px;
   height: 30px;
-  color: yellow;
+  color: white;
   text-align: center;
   line-height: 27px;
   letter-spacing: 1px;
@@ -163,6 +128,7 @@ section > div {
   border: 1px solid white;
   color: purple;
   background-color: silver !important;
+   animation: none;
 }
 .check {
   border-radius: 25%;
