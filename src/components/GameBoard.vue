@@ -73,7 +73,6 @@ function selectBall (px:number, py:number) {
     y: py
   }
   checkBall(pos)
-  // game.$store.dispatch('selectBall', pos)
   // if (game.count === bl) {
   //   game.$store.dispatch('nextLevel')
   // }
@@ -91,7 +90,7 @@ function setnull () {
   left: 0;
   z-index: 50;
   background: rgba(210, 20, 125, 0.5);
-  color: yellow;
+  color: white;
   width: 100vw;
 }
 section {
@@ -114,7 +113,7 @@ section > div {
   border-radius: 35%;
   width: 30px;
   height: 30px;
-  color: yellow;
+  color: white;
   text-align: center;
   line-height: 27px;
   letter-spacing: 1px;
@@ -127,6 +126,7 @@ section > div {
   border: 1px solid white;
   color: purple;
   background-color: silver !important;
+   animation: none;
 }
 .check {
   border-radius: 25%;

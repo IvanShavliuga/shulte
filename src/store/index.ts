@@ -31,7 +31,7 @@ class ShulteGame {
   createdflag = false;
   msg = '';
   genLevel () {
-    let i = 0
+    let i = (this.level - 1) * 100
     const colors = [
       { red: 190, green: 20, blue: 20 },
       { red: 20, green: 190, blue: 20 },
@@ -42,9 +42,9 @@ class ShulteGame {
       { red: 190, green: 100, blue: 20 }
     ]
     if (!this.createdflag) {
-      for (let i = 0; i < 10; i++) {
-        this.rows.push(i + 1)
-        this.columns.push(i + 1)
+      for (let j = 0; j < 10; j++) {
+        this.rows.push(j + 1)
+        this.columns.push(j + 1)
       }
       this.createdflag = true
     }
@@ -54,13 +54,19 @@ class ShulteGame {
     // state.level = localStorage.shultelevel ? +localStorage.shultelevel : 1;
 
     const bl = this.rows.length * this.columns.length
+    let color = 0
+    const colorRange = ~~(bl / (colors.length))
+    console.log(colorRange)
     for (let y = 0; y < this.rows.length; y++) {
       for (let x = 0; x < this.columns.length; x++) {
         i++
+        if (!(i % colorRange) && color < colors.length - 1) {
+          color++
+        }
         this.board.push({
           value: i,
           status: 'init',
-          color: colors[i % colors.length]
+          color: colors[color]
         })
       }
     }
@@ -78,7 +84,8 @@ class ShulteGame {
     const posbr = ball.x + ball.y * cl
     this.selnum = this.board[posbr].value
     this.checked.push(this.selnum)
-    if (this.count < bl) {
+    if (this.count < bl * this.level) {
+      this.winner = false
       if (this.selnum - this.count !== 1) {
         this.scores -= 5
         this.clickok = false
@@ -88,6 +95,12 @@ class ShulteGame {
         this.board[posbr].status = 'OK'
         this.clickok = true
       }
+    } else {
+      this.level++
+      this.winner = true
+      this.board = []
+      this.count = (this.level - 1) * 100
+      this.genLevel()
     }
   }
 }
